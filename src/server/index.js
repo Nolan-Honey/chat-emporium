@@ -2,7 +2,16 @@ const serve = require('koa-static-server')
 var koa = require('koa')
 var app = new (koa)()
 var http = require('http')
- 
+var mongoose = require('mongoose');
+var db = require('db');
+var Message = require('chat');
+
+mongoose.connect(db.conStr, { useNewUrlParser: true }).then(
+  () => {console.log('Database is now connected') },
+  err => { console.log('Can not connect to the database '+ err)}
+);
+
+
 app.use(serve({rootDir: 'public'}))
 
 
